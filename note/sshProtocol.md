@@ -22,12 +22,58 @@ After running this command, two keys will be created:
 - `my_ssh_key`: the private key, which should remain secret.
 - `my_ssh_key.pub`: the public key, which can be shared.
 
-### Copying the Public Key to the Server
-After generating the key, you need to copy the public key to the server you want to access. You can do this using the `ssh-copy-id` command:
 
-```bash
-ssh-copy-id -i ~/.ssh/my_ssh_key.pub user@remote_server
-```
+### Creating a New User ( with Sudo Privileges )
+
+ **Log in as root to your VPS:**
+   ```sh
+   ssh root@your_vps_ip
+   ```
+   This command connects you to your VPS using the root user. Replace `your_vps_ip` with the actual IP address of your VPS.
+
+ **Create a new user:**
+   ```sh
+   adduser cry0l1t3
+   ```
+   This command creates a new user named `cry0l1t3`. You will be prompted to set a password and provide optional information for the new user.
+
+ **Add the user to the `sudo` group (on some distributions, the group might be `wheel`):**
+   ```sh
+   usermod -aG sudo cry0l1t3
+   ```
+   This command adds the user `cry0l1t3` to the `sudo` group, giving the user administrative privileges.
+
+ **Switch to the new user to verify that the user was created correctly:**
+   ```sh
+   su - cry0l1t3
+   ```
+   This command switches to the new user `cry0l1t3`. You will need to enter the password for this user when prompted.
+
+### 2. Configuring the SSH Key for the New User
+
+**Log in as the new user (if not already switched):**
+   ```sh
+   su - cry0l1t3
+   ```
+   This command ensures you are operating as the new user `cry0l1t3`.
+
+**Create an `.ssh` directory in the user's home directory and set the correct permissions:**
+   ```sh
+   mkdir ~/.ssh
+   ```
+   This command creates the `.ssh` directory in the home directory of `cry0l1t3`.
+
+**Add the SSH public key to the `authorized_keys` file:**
+   ```sh
+   echo '<vps-ssh.pub>' > ~/.ssh/authorized_keys
+   ```
+   Replace `'<vps-ssh.pub>'` with the actual SSH public key you want to use for accessing the VPS. This command saves the SSH public key to the `authorized_keys` file.
+
+**Set the correct permissions on the `authorized_keys` file:**
+   ```sh
+   chmod 600 ~/.ssh/authorized_keys
+   ```
+   This command sets the permissions of the `authorized_keys` file to ensure it is secure. Only the user should have read and write access to this file.
 
 or add the key manually from the site.
 
