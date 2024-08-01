@@ -55,11 +55,18 @@ Now, to assign the user an SSH key, you must first generate a key pair on the us
 ssh-keygen -t rsa -b 2048 -f ~/.ssh/newuser_ssh_key
 ```
 
-Then, the public key `newuser_ssh_key.pub` needs to be copied to the new user's `~/.ssh/authorized_keys` file on the VPS. This can be done by:
+Then, the public key `newuser_ssh_key.pub` needs to be copied to the new user's `~/.ssh/authorized_keys` file on the VPS.  After the new user give his public key to the root user this can be done by:
 
 ```bash
 mkdir -p /home/newuser/.ssh
 cat newuser_ssh_key.pub >> /home/newuser/.ssh/authorized_keys
+```
+
+or
+
+```bash
+mkdir -p /home/newuser/.ssh
+echo "newuser_ssh_key" >> /home/newuser/.ssh/authorized_keys
 ```
 
 Lastly, you must set the correct permissions:
