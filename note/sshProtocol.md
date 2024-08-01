@@ -22,7 +22,7 @@ After running this command, two keys will be created:
 - `my_ssh_key`: the private key, which should remain secret.
 - `my_ssh_key.pub`: the public key, which can be shared.
 
-### Step 2: Copying the Public Key to the Server
+### Copying the Public Key to the Server
 After generating the key, you need to copy the public key to the server you want to access. You can do this using the `ssh-copy-id` command:
 
 ```bash
@@ -35,7 +35,7 @@ or add the key manually from the site.
 - `-i ~/.ssh/my_ssh_key.pub`: specifies the file of the public key to be copied.
 - `user@remote_server`: replace `user` with your username on the server and `remote_server` with the IP address or hostname of the server.
 
-### Step 3: First Access to the Server
+### First Access to the Server
 Once the public key is copied to the server, you can perform the first login using the following command:
 
 ```bash
