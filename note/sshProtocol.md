@@ -1,10 +1,15 @@
 ## SSH Protocol Lesson
 
 ### Introduction to SSH
-SSH, which stands for Secure Shell, is a network protocol that enables a secure and encrypted connection between a client and a server. It is widely used for accessing remote systems and executing commands or transferring files securely.
+
+SSH, or Secure Shell, is a widely used network protocol designed to provide a secure, encrypted connection between a client and a server. This secure connection is crucial for managing remote systems, executing commands, and transferring files without exposing sensitive data.
+
+At the heart of SSH authentication are two cryptographic keys: a public key and a private key. The relationship between these keys is fundamental to the security of the SSH protocol. The public key, which is stored on the server, can be shared openly, while the private key remains confidential on the client machine. When a client attempts to connect to the server, the server challenges the client with a cryptographic query. The client responds by signing this challenge with its private key, and the server uses the corresponding public key to verify the signature. This verification process confirms that the client possesses the correct private key, with a asimetrical math operation. This method ensures a secure and reliable authentication mechanism, establishing a trusted connection between the client and the server.
+
+
 
 ### Generating SSH Keys
-To use SSH securely, it is recommended to use key-based authentication rather than password credentials. Let's go through the process of generating SSH keys.
+To use SSH securely, it is recommended to use key-based authentication rather than password credentials. 
 
 ### Generating an SSH Key
 You can generate a pair of SSH keys using the following command in the terminal:
@@ -21,6 +26,10 @@ ssh-keygen -t rsa -b 4096 -f ~/.ssh/my_ssh_key
 After running this command, two keys will be created:
 - `my_ssh_key`: the private key, which should remain secret.
 - `my_ssh_key.pub`: the public key, which can be shared.
+
+
+When you create the VPS, the provider will ask you to put an ssh public key (key.pub), this key is the root user's key (the user with max level of privileges).
+
 
 
 ### Creating a New User ( with Sudo Privileges )
@@ -49,7 +58,9 @@ After running this command, two keys will be created:
    ```
    This command switches to the new user `cry0l1t3`. You will need to enter the password for this user when prompted.
 
-### 2. Configuring the SSH Key for the New User
+
+
+### Configuring the SSH Key for the New User
 
 **Log in as the new user (if not already switched):**
    ```sh
@@ -88,6 +99,7 @@ Once the public key is copied to the server, you can perform the first login usi
 ssh -i ~/.ssh/my_ssh_key user@remote_server
 ```
 
+
 ### `known_hosts` File
 When you access an SSH server for the first time, the server sends a public key that is stored in the `known_hosts` file in your `.ssh` directory. This file contains a list of public keys of the servers you connect to.
 
@@ -99,6 +111,7 @@ You can view the contents of this file with:
 cat ~/.ssh/known_hosts
 ```
 
+
 ### Subsequent Access
 To access the server again in the future, you can simply use:
 
@@ -108,21 +121,4 @@ ssh -i ~/.ssh/my_ssh_key user@remote_server
 
 SSH will attempt to authenticate using the private key you specified.
 
-### Verifying Successful Access
-After logging in, there are several ways to verify that the access was successful:
 
-1. **Check Terminal Output:** If you did not receive error messages and you have access to the server's shell, the access was successful.
-   
-2. **Check Remote Environment:** You can execute simple commands to verify that you are indeed on the desired server. For example:
-
-   ```bash
-   hostname
-   ```
-
-   This command will display the name of the current server.
-
-3. **Exit the Server:** To disconnect from the server, you can simply type:
-
-   ```bash
-   exit
-   ```
