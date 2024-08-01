@@ -16,9 +16,9 @@ Here:
 - `-f ~/.ssh/my_ssh_key` specifies the name and the file path where the keys will be saved, creating `my_ssh_key` (private key) and `my_ssh_key.pub` (public key).
 
 ### Inserting Public Key During VPS Creation:
-When creating a Virtual Private Server (VPS), the provider usually has an option to add the public key in the settings. This key should be the public key of the root user, named `key_name.pub` in this example. Once added, this allows the server to recognize the root user's private key for future SSH authentication.
+When creating a Virtual Private Server (VPS), the provider usually has an option to add the public key in the settings. This key should be the public key of the root user : `key_name.pub` . Once added, this allows the server to recognize the root user's private key for future SSH authentication.
 
-**Accessing a VPS:**
+### Accessing a VPS:
 To access the VPS, you can use the SSH command with your private key. For example:
 
 ```bash
