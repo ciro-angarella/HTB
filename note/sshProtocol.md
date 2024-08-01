@@ -6,7 +6,7 @@ SSH, which stands for Secure Shell, is a network protocol that enables a secure 
 ### Generating SSH Keys
 To use SSH securely, it is recommended to use key-based authentication rather than password credentials. Let's go through the process of generating SSH keys.
 
-### Step 1: Generating an SSH Key
+### Generating an SSH Key
 You can generate a pair of SSH keys using the following command in the terminal:
 
 ```bash
