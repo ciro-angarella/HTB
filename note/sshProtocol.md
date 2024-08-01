@@ -46,7 +46,7 @@ adduser newuser
 Next, you can add the user to the `sudo` group:
 
 ```bash
-usermod -aG sudo newuser //skip this part if you dont want add the sudo privileges
+usermod -aG sudo newuser #skip this part if you dont want add the sudo privileges
 ```
 
 Now, to assign the user an SSH key, you must first generate a key pair on the user's local machine. Using the same command as before, the user would create their private and public keys:
