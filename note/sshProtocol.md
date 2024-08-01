@@ -51,7 +51,7 @@ To add a new user, you first must be accesed as a root or a sudo user, then crea
 adduser newuser
 ```
 
-Next, you can add the user to the `sudo` group:
+add the user to the `sudo` group:
 
 ```bash
 usermod -aG sudo newuser #skip this part if you dont want add the sudo privileges
