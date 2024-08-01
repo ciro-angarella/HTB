@@ -37,7 +37,7 @@ ssh -i ~/.ssh/my_ssh_key root@your_vps_ip
 ```
 
 ### Adding New Users and Assigning SSH Keys:
-To add a new user and grant them `sudo` privileges, you first create the user with the following command:
+To add a new user, you first must be accesed as a root or a sudo user, then create the user with the following command:
 
 ```bash
 adduser newuser
