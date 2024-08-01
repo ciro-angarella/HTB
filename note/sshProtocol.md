@@ -22,15 +22,19 @@ When creating a Virtual Private Server (VPS), the provider usually has an option
 To access the VPS, you can use the SSH command with your private key. For example:
 
 ```bash
-ssh -i ~/.ssh/my_ssh_key root@your_vps_ip
+ssh -i ~/.ssh/key user_name@your_vps_ip
 ```
 
 In this command:
-- `-i ~/.ssh/my_ssh_key` specifies the private key file to use.
-- `root@your_vps_ip` indicates the root user of the VPS and its IP address.
+- `-i ~/.ssh/key` specifies the private key file to use.
+- `user_name@your_vps_ip` indicates the user of the VPS and its IP address.
 
 ### Accessing as Root:
-After running the above command, if the private key matches the public key on the server, you will gain root access to your VPS.
+To acces as Root user:
+
+```bash
+ssh -i ~/.ssh/my_ssh_key root@your_vps_ip
+```
 
 ### Adding New Users and Assigning SSH Keys:
 To add a new user and grant them `sudo` privileges, you first create the user with the following command:
