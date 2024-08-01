@@ -47,40 +47,36 @@ ssh -i ~/.ssh/my_ssh_key root@your_vps_ip
 ### Adding New Users and Assigning SSH Keys:
 To add a new user, you first must be accesed as a root or a sudo user, then create the user with the following command:
 
+add a new user on the VPS:
+
 ```bash
 adduser newuser
+usermod -aG sudo newuser
+su - newuser # login as new user
 ```
 
-add the user to the `sudo` group:
+
+Now, to assign the user an SSH key ('newuser_ssh_key'), you must first generate a key pair on the user's local machine. Using the same command as before, the user would create their private and public keys.
+
+
+
+Then, the public key `newuser_ssh_key.pub` needs to be copied to the new user's `~/.ssh/authorized_keys` file on the VPS:
 
 ```bash
-usermod -aG sudo newuser #skip this part if you dont want add the sudo privileges
-```
-
-Now, to assign the user an SSH key, you must first generate a key pair on the user's local machine. Using the same command as before, the user would create their private and public keys:
-
-```bash
-ssh-keygen -t rsa -b 2048 -f ~/.ssh/newuser_ssh_key
-```
-
-Then, the public key `newuser_ssh_key.pub` needs to be copied to the new user's `~/.ssh/authorized_keys` file on the VPS.  After the new user give his public key to the root user this can be done by:
-
-```bash
-mkdir -p /home/newuser/.ssh
+mkdir ~/.ssh
 cat newuser_ssh_key.pub >> /home/newuser/.ssh/authorized_keys
 ```
 
 or
 
 ```bash
-mkdir -p /home/newuser/.ssh
+mkdir ~/.ssh
 echo "newuser_ssh_key" >> /home/newuser/.ssh/authorized_keys
 ```
 
 Lastly, you must set the correct permissions:
 
 ```bash
-chown newuser:newuser /home/newuser/.ssh/authorized_keys
 chmod 600 /home/newuser/.ssh/authorized_keys
 ```
 
@@ -90,4 +86,4 @@ This ensures that the new user can now access the VPS securely using their SSH k
 ssh -i ~/.ssh/newuser_ssh_key newuser@your_vps_ip
 ```
 
-Using these commands, users can securely access the VPS and manage permissions and capabilities as required.
+
